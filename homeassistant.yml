@@ -1,37 +1,210 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+_color: '#AAAAAA'
+_labelTemplates:
+  - ''
+  - ''
+  - '{{state}}{{unit_of_measurement}}'
+_states:
+  unavailable:
+    color: '#FF6F91'
+  unknown:
+    color: '#FF6F91'
+  error:
+    color: '#FF6F91'
+  # ======================== On-States ======================
+  on:
+    color: '#ffd484'
+  playing:
+    color: '#ffd484'
+  open:
+    color: '#ffd484'
+  opening:
+    color: '#ffd484'
+  home:
+    color: '#ffd484'
+  locked:
+    color: '#ffd484'
+  heat:
+    color: '#ffd484'
+  active:
+    color: '#ffd484'
+  # =========================================================
 
-\f0\fs24 \cf0 sensor:\
-  classes:\
-    miele_washer:\
-      labelTemplates:\
-        - ''\
-        - ''\
-        - >\
-          \{% if state == 'off' %\}\
-            Off\
-          \{% elif state == 'in_use' %\}\
-            Running\
-          \{% elif state == 'program_ended' %\}\
-            Done\
-          \{% else %\}\
-            \{\{ state \}\}\
-          \{% endif %\}\
-      states:\
-        off:\
-          icon: mdi:washing-machine-off\
-          color: '#AAAAAA'\
-        in_use:\
-          icon: mdi:washing-machine\
-          color: '#00C9A7'\
-        program_ended:\
-          icon: mdi:check-circle-outline\
-          color: '#FFD700'\
-        unavailable:\
-          icon: mdi:alert\
-          color: '#666666'\
-}
+switch:
+  labelTemplates:
+  icon: mdi:toggle-switch-off
+  states:
+    on:
+      icon: mdi:toggle-switch
+
+light:
+  labelTemplates:
+  icon: mdi:lightbulb
+  color: '#888888'
+  feedbackLayout: '$B1'
+  feedback: |
+    {% set defaultBrightness = (255 if state === 'on' else 0) %}
+    {% set brightness = attributes.brightness | default(defaultBrightness, true) %}
+    {
+      "indicator": {{ brightness / 255 * 100 }},
+      "value": "{{ (brightness / 255 * 100) | int }}%"
+    }
+  states:
+    unavailable:
+      icon: mdi:lightbulb-alert
+    on:
+      color: '#ffd484'
+
+input_boolean:
+  labelTemplates:
+  icon: mdi:toggle-switch-off
+  states:
+    on:
+      icon: mdi:toggle-switch
+
+update:
+  icon: mdi:package
+  states:
+    on:
+      icon: mdi:package
+      color: '#FF8066'
+
+person:
+  icon: mdi:account
+  states:
+    not_home:
+      icon: mdi:account-arrow-right
+
+binary_sensor:
+  labelTemplates:
+  icon: mdi:radiobox-blank
+  states:
+    on:
+      icon: mdi:radiobox-marked
+  classes:
+    plug:
+      icon: mdi:power-plug-off-outline
+      states:
+        on:
+          icon: mdi:power-plug-outline
+    window:
+      icon: mdi:window-closed-variant
+      states:
+        on:
+          icon: mdi:window-open-variant
+    door:
+      icon: mdi:door-closed
+      states:
+        on:
+          icon: mdi:door-open
+    motion:
+      icon: mdi:motion-sensor
+      states:
+        off:
+          icon: mdi:motion-sensor-off
+
+cover:
+  icon: mdi:garage
+  states:
+    open:
+      icon: mdi:garage-open
+    closing:
+      icon: mdi:arrow-down-box
+    opening:
+      icon: mdi:arrow-up-box
+
+sensor:
+  icon: mdi:information-outline
+  labelTemplates:
+    - ''
+    - ''
+    - >
+      {% if state == 'off' %}
+        Off
+      {% elif state == 'in_use' %}
+        Running
+      {% elif state == 'program_ended' %}
+        Done
+      {% else %}
+        {{ state }}
+      {% endif %}
+  states:
+    off:
+      icon: mdi:washing-machine-off
+      color: '#AAAAAA'
+    in_use:
+      icon: mdi:washing-machine
+      color: '#00C9A7'
+    program_ended:
+      icon: mdi:check-circle-outline
+      color: '#FFD700'
+    unavailable:
+      icon: mdi:alert
+      color: '#666666'
+
+weather:
+  labelTemplates:
+    - ''
+    - ''
+    - '{{temperature}}{{temperature_unit}}'
+    - '{{humidity}}%'
+  states:
+    clear-night:
+      icon: mdi:weather-night
+    cloudy:
+      icon: mdi:weather-cloudy
+    fog:
+      icon: mdi:weather-fog
+    hail:
+      icon: mdi:weather-hail
+    lightning:
+      icon: mdi:weather-lightning
+    lightning-rainy:
+      icon: mdi:weather-lightning-rainy
+    partlycloudy:
+      icon: mdi:weather-partly-cloudy
+    pouring:
+      icon: mdi:weather-puring
+    rainy:
+      icon: mdi:weather-rainy
+    snowy:
+      icon: mdi:weather-snowy
+    snowy-rainy:
+      icon: mdi:weather-snowy-rainy
+    sunny:
+      icon: mdi:weather-sunny
+    windy:
+      icon: mdi:weather-windy
+    windy-variant:
+      icon: mdi:weather-windy-variant
+
+lock:
+  icon: mdi:lock
+  states:
+    unlocked:
+      icon: mdi:lock-open
+    locking:
+      icon: mdi:lock-clock
+    unlocking:
+      icon: mdi:lock-clock
+    locked:
+      icon: mdi:lock
+    jammed:
+      icon: mdi:lock-open-alert
+
+vacuum:
+  icon: mdi:robot-vacuum
+  states:
+    cleaning:
+      color: '#00C9A7'
+    returning:
+      color: '#F9F871'
+
+lawn_mower:
+  icon: mdi:robot-mower
+  states:
+    mowing:
+      color: '#00C9A7'
+    paused:
+      color: '#F9F871'
+    returning:
+      color: '#F9F871'
