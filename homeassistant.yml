@@ -113,7 +113,7 @@ cover:
       icon: mdi:arrow-up-box
 
 sensor:
-  icon: mdi:information-outline
+  icon: 🧺
   labelTemplates:
     - ''
     - ''
@@ -129,16 +129,16 @@ sensor:
       {% endif %}
   states:
     off:
-      icon: mdi:washing-machine-off
+      icon: 📴
       color: '#AAAAAA'
     in_use:
-      icon: mdi:washing-machine
+      icon: 🔄
       color: '#00C9A7'
     program_ended:
-      icon: mdi:check-circle-outline
+      icon: ✅
       color: '#FFD700'
     unavailable:
-      icon: mdi:alert
+      icon: ❌
       color: '#666666'
 
 weather:
