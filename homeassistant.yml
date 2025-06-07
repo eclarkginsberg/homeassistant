@@ -113,7 +113,7 @@ cover:
       icon: mdi:arrow-up-box
 
 sensor:
-  icon: 🧺
+  icon: https://raw.githubusercontent.com/eclarkginsberg/homeassistant/bc04c8c68a28f227a7c5bdaa15a37cb0dd0a22d0/washer-off.png
   labelTemplates:
     - ''
     - ''
@@ -129,17 +129,17 @@ sensor:
       {% endif %}
   states:
     off:
-      icon: 📴
+      icon: https://raw.githubusercontent.com/eclarkginsberg/homeassistant/bc04c8c68a28f227a7c5bdaa15a37cb0dd0a22d0/washer-off.png
       color: '#AAAAAA'
     in_use:
-      icon: 🔄
+      icon: https://raw.githubusercontent.com/eclarkginsberg/homeassistant/bc04c8c68a28f227a7c5bdaa15a37cb0dd0a22d0/washer-running.png
       color: '#00C9A7'
     program_ended:
-      icon: ✅
+      icon: https://raw.githubusercontent.com/eclarkginsberg/homeassistant/bc04c8c68a28f227a7c5bdaa15a37cb0dd0a22d0/washer-done.png
       color: '#FFD700'
     unavailable:
-      icon: ❌
       color: '#666666'
+
 
 weather:
   labelTemplates:
