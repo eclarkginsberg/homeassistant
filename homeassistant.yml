@@ -113,32 +113,26 @@ cover:
       icon: mdi:arrow-up-box
 
 sensor:
-  icon: https://raw.githubusercontent.com/eclarkginsberg/homeassistant/main/washer-off.png
   labelTemplates:
     - ''
     - ''
     - >
       {% if state == 'off' %}
-        Off
+        Detected Off
       {% elif state == 'in_use' %}
-        Running
+        Detected Running
       {% elif state == 'program_ended' %}
-        Done
+        Detected Done
       {% else %}
         {{ state }}
       {% endif %}
   states:
     off:
-      icon: https://raw.githubusercontent.com/eclarkginsberg/homeassistant/main/washer-off.png
-      color: '#AAAAAA'
+      color: '#888888'
     in_use:
-      icon: https://raw.githubusercontent.com/eclarkginsberg/homeassistant/main/washer-running.png
-      color: '#00C9A7'
+      color: '#44DD88'
     program_ended:
-      icon: https://raw.githubusercontent.com/eclarkginsberg/homeassistant/main/washer-done.png
       color: '#FFD700'
-    unavailable:
-      color: '#666666'
 
 weather:
   labelTemplates:
