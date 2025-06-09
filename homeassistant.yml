@@ -120,24 +120,24 @@ sensor:
       {% if entity_id == 'sensor.washing_machine' %}
         {% set remaining = states('sensor.washing_machine_remaining_time') %}
         {% if state == 'in_use' and remaining not in ['unknown', 'unavailable'] %}
-          Washer | {{ remaining }}
+          On | {{ remaining }}
         {% elif state == 'off' %}
-          Washer | Off
+          Off
         {% elif state == 'program_ended' %}
-          Washer | Done
+          Done
         {% else %}
-          Washer | {{ state }}
+          {{ state }}
         {% endif %}
       {% elif entity_id == 'sensor.dishwasher' %}
         {% set remaining = states('sensor.dishwasher_remaining_time') %}
         {% if state == 'in_use' and remaining not in ['unknown', 'unavailable'] %}
-          Dishes | {{ remaining }}
+          On | {{ remaining }}
         {% elif state == 'off' %}
-          Dishes | Off
+         Off
         {% elif state == 'program_ended' %}
-          Dishes | Done
+          Done
         {% else %}
-          Dishes | {{ state }}
+          {{ state }}
         {% endif %}
       {% else %}
         {{ state }}
