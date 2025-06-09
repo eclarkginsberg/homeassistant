@@ -117,22 +117,44 @@ sensor:
     - ''
     - ''
     - >
-      {% if state == 'off' %}
-        Detected Off
-      {% elif state == 'in_use' %}
-        Detected Running
-      {% elif state == 'program_ended' %}
-        Detected Done
+      {% if entity_id == 'sensor.washing_machine' %}
+        {% set remaining = states('sensor.washing_machine_remaining_time') %}
+        {% if state == 'in_use' and remaining not in ['unknown', 'unavailable'] %}
+          Washer | {{ remaining }}
+        {% elif state == 'off' %}
+          Washer | Off
+        {% elif state == 'program_ended' %}
+          Washer | Done
+        {% else %}
+          Washer | {{ state }}
+        {% endif %}
+      {% elif entity_id == 'sensor.dishwasher' %}
+        {% set remaining = states('sensor.dishwasher_remaining_time') %}
+        {% if state == 'in_use' and remaining not in ['unknown', 'unavailable'] %}
+          Dishes | {{ remaining }}
+        {% elif state == 'off' %}
+          Dishes | Off
+        {% elif state == 'program_ended' %}
+          Dishes | Done
+        {% else %}
+          Dishes | {{ state }}
+        {% endif %}
       {% else %}
         {{ state }}
       {% endif %}
   states:
     off:
-      color: '#888888'
+      icon: mdi:power
+      color: '#AAAAAA'
     in_use:
-      color: '#44DD88'
+      icon: mdi:progress-clock
+      color: '#00C9A7'
     program_ended:
+      icon: mdi:check-circle-outline
       color: '#FFD700'
+    unavailable:
+      icon: mdi:alert
+      color: '#666666'
 
 weather:
   labelTemplates:
